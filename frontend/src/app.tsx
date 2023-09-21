@@ -1,6 +1,6 @@
 function App() {
   return (
-    <div>
+    <div className="relative">
       <h1>Post Management App</h1>
     </div>
   );
