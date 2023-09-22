@@ -1,2 +1,9 @@
 # OS
 .DS_Store
+
+# Frontend
+frontend/node_modules
+
+# Backend
+backend/node_modules
+backend/dist
