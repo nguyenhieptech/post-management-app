@@ -8,5 +8,6 @@
   "bracketSameLine": false,
   "tabWidth": 2,
   "printWidth": 100,
-  "organizeImportsSkipDestructiveCodeActions": true
+  "organizeImportsSkipDestructiveCodeActions": true,
+  "plugins": ["prettier-plugin-organize-imports"]
 }
