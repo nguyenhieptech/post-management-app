@@ -1,9 +1,7 @@
+import { AppProvider } from './providers';
+
 function App() {
-  return (
-    <div className="relative">
-      <h1>Post Management App</h1>
-    </div>
-  );
+  return <AppProvider />;
 }
 
 export default App;
