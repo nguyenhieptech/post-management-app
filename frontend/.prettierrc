@@ -14,6 +14,12 @@
       "options": {
         "printWidth": 120
       }
+    },
+    {
+      "files": "./src/components/**/*.{tsx,ts}",
+      "options": {
+        "printWidth": 100
+      }
     }
   ],
   "organizeImportsSkipDestructiveCodeActions": true,
@@ -26,5 +32,6 @@
     "leaveFrom",
     "leaveTo"
   ],
-  "tailwindFunctions": ["clsx", "cva"]
+  "tailwindFunctions": ["clsx", "cva"],
+  "plugins": ["prettier-plugin-organize-imports"]
 }
