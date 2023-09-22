@@ -10,6 +10,9 @@ async function bootstrap() {
   // https://docs.nestjs.com/faq/global-prefix
   app.setGlobalPrefix('api');
 
+  // https://docs.nestjs.com/security/cors
+  app.enableCors();
+
   // https://docs.nestjs.com/openapi/introduction
   // Hint: To generate and download a Swagger JSON file, navigate to http://localhost:3000/swagger-json
   // (assuming that your Swagger documentation is available under http://localhost:3000/swagger).
