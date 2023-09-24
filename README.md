@@ -1,5 +1,18 @@
 # Post Management App
 
+Some preview images:
+
+![image](https://github.com/nguyenhieptech/post-management-app/assets/48057064/63fe6372-0c0f-44c9-a455-ac718014fe58)
+
+![image](https://github.com/nguyenhieptech/post-management-app/assets/48057064/8ec27161-a86d-414a-8042-e0740c4535f3)
+
+![image](https://github.com/nguyenhieptech/post-management-app/assets/48057064/b79b2dd5-2fd2-4dac-ae4c-4ad367089a24)
+
+![image](https://github.com/nguyenhieptech/post-management-app/assets/48057064/8c3dfd17-5a93-4d73-a903-ee182f2e92b2)
+
+![image](https://github.com/nguyenhieptech/post-management-app/assets/48057064/5388fe68-d456-4b96-b610-0a3af294e387)
+
+
 ## Backend
 
 - Techstack: NestJS (Fastify), Prisma ORM
@@ -30,7 +43,7 @@ npx prisma generate
 
 # Migrate prisma schema to db
 npx prisma migrate dev
- # or yarn prisma:migrate
+# or yarn prisma:migrate
 
 # Seed database if needed
 npx prisma db seed
