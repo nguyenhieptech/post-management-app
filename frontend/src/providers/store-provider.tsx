@@ -1,6 +1,7 @@
-import React from 'react';
+import store from '@/store';
+import { PropsWithChildren } from 'react';
+import { Provider } from 'react-redux';
 
-// TODO: Add state management library (Redux, etc)
-export function StoreProvider({ children }: { children: React.ReactNode }) {
-  return children;
+export function StoreProvider({ children }: PropsWithChildren) {
+  return <Provider store={store}>{children}</Provider>;
 }

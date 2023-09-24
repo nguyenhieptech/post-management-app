@@ -1,11 +1,14 @@
 import { ChevronDownIcon, CloseIcon } from '@/assets/icons';
 import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@/components/ui';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { baseApi } from '@/store/api';
+import { logout } from '@/store/slices';
 import { cn } from '@/utils';
 import { NavLink, NavLinkProps } from 'react-router-dom';
 
 type MobileNavItemProps = NavLinkProps & {
   children: React.ReactNode;
-  to: NavLinkProps['to'];
+  to?: NavLinkProps['to'];
 };
 
 function MobileNavItem({ to, children, ...props }: MobileNavItemProps) {
@@ -28,6 +31,14 @@ function MobileNavItem({ to, children, ...props }: MobileNavItemProps) {
 }
 
 export function MobileNavigation() {
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useAppDispatch();
+
+  function logoutUser() {
+    dispatch(logout());
+    dispatch(baseApi.util.resetApiState());
+  }
+
   return (
     <div className="pointer-events-auto md:hidden">
       <Popover>
@@ -43,11 +54,24 @@ export function MobileNavigation() {
           </div>
           <nav className="mt-6">
             <ul className="divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-              {/* TODO: Add conditional rendering */}
               <MobileNavItem to="/">Home</MobileNavItem>
-              <MobileNavItem to="create-post">Create Post</MobileNavItem>
-              <MobileNavItem to="login">Login</MobileNavItem>
-              <MobileNavItem to="register">Register</MobileNavItem>
+              {isLoggedIn ? (
+                <>
+                  <MobileNavItem to="/your-posts">Your posts</MobileNavItem>
+                  <MobileNavItem to="/create-post">Create post</MobileNavItem>
+                  <div
+                    onClick={logoutUser}
+                    className="hover:cursor-pointer block py-2 text-sm hover:text-teal-500 dark:hover:text-teal-400"
+                  >
+                    Logout
+                  </div>
+                </>
+              ) : (
+                <>
+                  <MobileNavItem to="/login">Login</MobileNavItem>
+                  <MobileNavItem to="/register">Register</MobileNavItem>
+                </>
+              )}
             </ul>
           </nav>
         </PopoverContent>

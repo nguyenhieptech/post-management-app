@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { ArrowLeftIcon } from '@/assets/icons';
 import { Container, Prose } from '@/components';
 import {
@@ -23,7 +24,13 @@ import {
   Textarea,
   toast,
 } from '@/components/ui';
-import { mutationPostFormSchema, posts } from '@/pages';
+import { mutationPostFormSchema } from '@/pages';
+import { useAppSelector } from '@/store';
+import {
+  useDeletePostMutation,
+  useGetPostByIdQuery,
+  useUpdatePostMutation,
+} from '@/store/api';
 import { formatDate } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -31,7 +38,7 @@ import {
   Pencil2Icon,
   TrashIcon,
 } from '@radix-ui/react-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as z from 'zod';
@@ -41,34 +48,67 @@ type EditPostForm = z.infer<typeof mutationPostFormSchema>;
 export function PostDetail() {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const post = posts.find((post) => post.id === postId);
+  const post = useGetPostByIdQuery(postId!);
+  const authorId = useAppSelector((state) => state.auth.userInfo?.id);
 
   const [isEditDialogOpen, setIsEditDialogConfirmOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogConfirmOpen] = useState(false);
 
-  const form = useForm<EditPostForm>({
+  const editForm = useForm<EditPostForm>({
     resolver: zodResolver(mutationPostFormSchema),
     defaultValues: {
-      title: post?.title,
-      description: post?.description,
-      content: post?.content,
+      title: post.data?.title,
+      description: post.data?.description,
+      content: post.data?.content,
     },
   });
 
-  function onSubmit(data: EditPostForm) {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  // Set default form values
+  useEffect(() => {
+    if (isEditDialogOpen) {
+      editForm.setValue('title', post.data?.title!);
+      editForm.setValue('description', post.data?.description!);
+      editForm.setValue('content', post.data?.content!);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEditDialogOpen]);
+
+  const [updatePostMutation] = useUpdatePostMutation();
+
+  async function onSubmit(editPostValues: EditPostForm) {
+    try {
+      await updatePostMutation({ ...editPostValues, id: postId }).unwrap();
+      toast({
+        title: 'Update post successfully',
+      });
+      setIsEditDialogConfirmOpen(false);
+      navigate('/');
+    } catch (error) {
+      toast({
+        title: 'Update post failed. Please try again',
+      });
+    }
   }
 
   function cancelEditPost() {
     setIsEditDialogConfirmOpen(false);
-    form.reset();
+    editForm.clearErrors();
+  }
+
+  const [deletePostMutation] = useDeletePostMutation();
+  async function deletePost() {
+    try {
+      await deletePostMutation(postId!).unwrap();
+      toast({
+        title: 'Delete post successfully',
+      });
+      setIsDeleteDialogConfirmOpen(false);
+      navigate('/');
+    } catch (error) {
+      toast({
+        title: 'Delete post failed. Please try again',
+      });
+    }
   }
 
   return (
@@ -88,52 +128,62 @@ export function PostDetail() {
             <header className="flex flex-col">
               <div className="flex justify-between">
                 <time
-                  dateTime={post?.date}
+                  dateTime={post.data?.created_at}
                   className="flex items-center text-base text-zinc-400 dark:text-zinc-500"
                 >
                   <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
-                  <span className="ml-3">{formatDate(post?.date)}</span>
+                  <span className="ml-3">
+                    {formatDate(post.data?.created_at)}
+                  </span>
                 </time>
 
-                {/* TODO: Add conditional rendering */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger>
-                    <Button
-                      className="hover:cursor-pointer flex items-center justify-between dark:bg-zinc-800"
-                      variant="secondary"
+                {/* Users can only delete their own posts */}
+                {authorId === post.data?.author_id && (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>
+                      <Button
+                        className="hover:cursor-pointer flex items-center justify-between dark:bg-zinc-800"
+                        variant="secondary"
+                      >
+                        <DotsHorizontalIcon className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      className="bg-white dark:bg-zinc-900 w-40"
+                      align="end"
                     >
-                      <DotsHorizontalIcon className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent
-                    className="bg-white dark:bg-zinc-900 w-40"
-                    align="end"
-                  >
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem
-                      className="flex justify-between"
-                      onClick={() => setIsEditDialogConfirmOpen(true)}
-                    >
-                      <p>Edit</p>
-                      <Pencil2Icon className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
-                    </DropdownMenuItem>
+                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuItem
+                        className="flex justify-between"
+                        onClick={() => setIsEditDialogConfirmOpen(true)}
+                      >
+                        <p>Edit</p>
+                        <Pencil2Icon className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
+                      </DropdownMenuItem>
 
-                    <DropdownMenuItem
-                      className="flex justify-between"
-                      onClick={() => setIsDeleteDialogConfirmOpen(true)}
-                    >
-                      <p>Delete</p>
-                      <TrashIcon className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                      <DropdownMenuItem
+                        className="flex justify-between"
+                        onClick={() => setIsDeleteDialogConfirmOpen(true)}
+                      >
+                        <p>Delete</p>
+                        <TrashIcon className="h-4 w-4 text-zinc-500 dark:text-zinc-400" />
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
               </div>
               <h1 className="mt-6 text-4xl font-bold tracking-normal text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-                {post?.title}
+                {post.data?.title}
               </h1>
             </header>
-            <Prose className="mt-8">{post?.content}</Prose>
+            <Prose className="mt-8">{post.data?.content}</Prose>
           </article>
+
+          {post.isLoading ? (
+            <article>
+              <p>Loading...</p>
+            </article>
+          ) : null}
         </div>
       </div>
 
@@ -145,10 +195,13 @@ export function PostDetail() {
             <DialogTitle>Edit Post</DialogTitle>
           </DialogHeader>
           <Separator className="my-2" />
-          <Form {...form}>
-            <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+          <Form {...editForm}>
+            <form
+              className="space-y-4"
+              onSubmit={editForm.handleSubmit(onSubmit)}
+            >
               <FormField
-                control={form.control}
+                control={editForm.control}
                 name="title"
                 render={({ field }) => (
                   <FormItem>
@@ -161,7 +214,7 @@ export function PostDetail() {
                 )}
               />
               <FormField
-                control={form.control}
+                control={editForm.control}
                 name="description"
                 render={({ field }) => (
                   <FormItem>
@@ -174,7 +227,7 @@ export function PostDetail() {
                 )}
               />
               <FormField
-                control={form.control}
+                control={editForm.control}
                 name="content"
                 render={({ field }) => (
                   <FormItem>
@@ -221,7 +274,11 @@ export function PostDetail() {
           </DialogHeader>
           <Separator className="my-2" />
           <div className="flex flex-col md:flex-row justify-between md:space-x-4 space-y-4 md:space-y-0">
-            <Button className="md:w-1/2" variant="destructive">
+            <Button
+              className="md:w-1/2"
+              variant="destructive"
+              onClick={deletePost}
+            >
               Yes, delete this post
             </Button>
             <Button className="md:w-1/2" variant="secondary">

@@ -1,10 +1,11 @@
-export type Post = Partial<{
-  id: string;
+export type Post = {
+  id?: string;
   title: string;
   description: string;
   content: string;
-  date: string;
-}>;
+  created_at?: string;
+  author_id?: number;
+};
 
 /**
  * Use this instead of "any" and fix "any" type later
@@ -12,3 +13,44 @@ export type Post = Partial<{
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type TSFixMe = any;
+
+export type AccessToken = {
+  access_token: string;
+};
+
+export type AuthRequest = {
+  email: string;
+  password: string;
+};
+
+export type RegisterRequest = AuthRequest;
+
+export type ApiRegisterResponse = AccessToken & {
+  user_info: {
+    id: number | string;
+    email: string;
+  };
+};
+
+export type LoginRequest = AuthRequest;
+
+export type ApiLoginResponse = AccessToken & {
+  user_info: {
+    id: number;
+    email: string;
+  };
+};
+
+export type CreatePostResponse = {
+  id: number;
+  created_at: Date;
+  updated_at: Date;
+  title: string;
+  description: string;
+  content: string;
+  author_id: number;
+};
+
+export type UpdatePostResponse = Partial<CreatePostResponse>;
+
+export type DeletePostResponse = Partial<CreatePostResponse>;
