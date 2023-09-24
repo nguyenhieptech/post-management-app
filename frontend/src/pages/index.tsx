@@ -4,3 +4,4 @@ export * from './login';
 export * from './not-found';
 export * from './post-detail';
 export * from './register';
+export * from './your-posts';

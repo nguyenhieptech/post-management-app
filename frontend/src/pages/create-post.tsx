@@ -12,6 +12,8 @@ import {
   Textarea,
   toast,
 } from '@/components/ui';
+import { useAppSelector } from '@/store';
+import { useCreatePostMutation } from '@/store/api';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
@@ -40,7 +42,7 @@ export const mutationPostFormSchema = z.object({
       message: 'Content must be at least 100 characters.',
     })
     .max(10000, {
-      message: 'Content must not be longer than 3000 characters.',
+      message: 'Content must not be longer than 10000 characters.',
     }),
 });
 
@@ -48,8 +50,9 @@ type CreatePostForm = z.infer<typeof mutationPostFormSchema>;
 
 export function CreatePost() {
   const navigate = useNavigate();
+  const authorId = useAppSelector((state) => state.auth.userInfo?.id);
 
-  const form = useForm<CreatePostForm>({
+  const createForm = useForm<CreatePostForm>({
     resolver: zodResolver(mutationPostFormSchema),
     defaultValues: {
       title: '',
@@ -58,15 +61,23 @@ export function CreatePost() {
     },
   });
 
-  function onSubmit(data: CreatePostForm) {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  const [createPostMutation] = useCreatePostMutation();
+
+  async function onSubmit(createPostFormValues: CreatePostForm) {
+    try {
+      await createPostMutation({
+        author_id: Number(authorId),
+        ...createPostFormValues,
+      }).unwrap();
+      toast({
+        title: 'Create post successfully',
+      });
+      navigate('/');
+    } catch (error) {
+      toast({
+        title: 'Create post failed',
+      });
+    }
   }
 
   return (
@@ -81,13 +92,13 @@ export function CreatePost() {
         <Separator className="my-6" />
         <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
           <div className="flex-1 lg:max-w-2xl">
-            <Form {...form}>
+            <Form {...createForm}>
               <form
                 className="space-y-8"
-                onSubmit={form.handleSubmit(onSubmit)}
+                onSubmit={createForm.handleSubmit(onSubmit)}
               >
                 <FormField
-                  control={form.control}
+                  control={createForm.control}
                   name="title"
                   render={({ field }) => (
                     <FormItem>
@@ -100,7 +111,7 @@ export function CreatePost() {
                   )}
                 />
                 <FormField
-                  control={form.control}
+                  control={createForm.control}
                   name="description"
                   render={({ field }) => (
                     <FormItem>
@@ -113,7 +124,7 @@ export function CreatePost() {
                   )}
                 />
                 <FormField
-                  control={form.control}
+                  control={createForm.control}
                   name="content"
                   render={({ field }) => (
                     <FormItem>

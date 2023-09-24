@@ -7,7 +7,11 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  toast,
 } from '@/components/ui';
+import { useAppDispatch } from '@/store';
+import { useRegisterMutation } from '@/store/api';
+import { register } from '@/store/slices';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { EyeOpenIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
@@ -15,31 +19,43 @@ import { useForm } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as z from 'zod';
 
-const formSchema = z.object({
+const registerFormSchema = z.object({
   email: z.string().min(2).email().max(50),
   password: z.string().min(2).max(50),
 });
-type RegisterForm = z.infer<typeof formSchema>;
+type RegisterForm = z.infer<typeof registerFormSchema>;
 
 export function Register() {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const navigate = useNavigate();
-
   function handleShowPassword() {
-    setIsPasswordShown((prev) => !prev);
+    setIsPasswordShown((previous) => !previous);
   }
 
-  const form = useForm<RegisterForm>({
-    resolver: zodResolver(formSchema),
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const [registerMutation] = useRegisterMutation();
+
+  const registerForm = useForm<RegisterForm>({
+    resolver: zodResolver(registerFormSchema),
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  function onSubmit(values: RegisterForm) {
-    console.log(values);
-    navigate('/');
+  async function onSubmit(registerFormValues: RegisterForm) {
+    try {
+      const response = await registerMutation(registerFormValues).unwrap();
+      dispatch(register(response));
+      toast({
+        title: 'Register successfully',
+      });
+      navigate('/');
+    } catch {
+      toast({
+        title: 'Register failed',
+      });
+    }
   }
 
   return (
@@ -52,11 +68,14 @@ export function Register() {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="mx-4 rounded-md border border-zinc-100 bg-white px-6 py-12 shadow dark:border-none dark:bg-zinc-900 sm:rounded-lg sm:px-12">
-          <Form {...form}>
-            <form className="space-y-10" onSubmit={form.handleSubmit(onSubmit)}>
+          <Form {...registerForm}>
+            <form
+              className="space-y-10"
+              onSubmit={registerForm.handleSubmit(onSubmit)}
+            >
               <div className="space-y-4">
                 <FormField
-                  control={form.control}
+                  control={registerForm.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
@@ -64,6 +83,7 @@ export function Register() {
                       <FormControl>
                         <Input
                           placeholder="example.email@gmail.com"
+                          autoComplete="email"
                           {...field}
                         />
                       </FormControl>
@@ -72,7 +92,7 @@ export function Register() {
                   )}
                 />
                 <FormField
-                  control={form.control}
+                  control={registerForm.control}
                   name="password"
                   render={({ field }) => (
                     <FormItem>

@@ -1,4 +1,4 @@
-import { IsString, Length } from 'class-validator';
+import { IsNumber, IsString, Length } from 'class-validator';
 
 export class CreatePostDto {
   @IsString()
@@ -12,4 +12,7 @@ export class CreatePostDto {
   @IsString()
   @Length(100, 10000)
   content: string;
+
+  @IsNumber()
+  author_id: number;
 }
