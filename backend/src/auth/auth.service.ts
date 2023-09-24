@@ -27,7 +27,15 @@ export class AuthService {
           created_at: true,
         },
       });
-      return await this.signJwtToken(user.id, user.email);
+      const accessToken = await this.signJwtToken(user.id, user.email);
+
+      return {
+        access_token: accessToken,
+        user_info: {
+          id: user.id,
+          email: user.email,
+        },
+      };
     } catch (error) {
       if (error.code == 'P2002') {
         // throw new ForbiddenException(error.message)
@@ -51,7 +59,15 @@ export class AuthService {
     }
     delete user.hashed_password;
 
-    return await this.signJwtToken(user.id, user.email);
+    const accessToken = await this.signJwtToken(user.id, user.email);
+
+    return {
+      ...accessToken,
+      user_info: {
+        id: user.id,
+        email: user.email,
+      },
+    };
   }
 
   async signJwtToken(userId: number, email: string): Promise<{ access_token: string }> {

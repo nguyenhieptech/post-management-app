@@ -12,6 +12,7 @@ export class PostsService {
         title: createPostDto.title,
         description: createPostDto.description,
         content: createPostDto.content,
+        author_id: createPostDto.author_id,
       },
     });
 
