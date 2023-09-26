@@ -69,7 +69,7 @@ export function PostDetail() {
       editForm.setValue('title', post.data?.title!);
       editForm.setValue('description', post.data?.description!);
       editForm.setValue('content', post.data?.content!);
-      editForm.clearErrors(['title', 'description', 'content']);
+      editForm.clearErrors();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isEditDialogOpen]);
