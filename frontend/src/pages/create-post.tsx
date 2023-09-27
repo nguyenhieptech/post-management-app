@@ -8,16 +8,23 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
   Separator,
   Textarea,
   toast,
 } from '@/components/ui';
 import { useAppSelector } from '@/store';
 import { useCreatePostMutation } from '@/store/api';
+import { ApiErrorResponse } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import * as z from 'zod';
+import { tags } from '.';
 
 export const mutationPostFormSchema = z.object({
   title: z
@@ -44,6 +51,7 @@ export const mutationPostFormSchema = z.object({
     .max(10000, {
       message: 'Content must not be longer than 10000 characters.',
     }),
+  tag: z.string(),
 });
 
 type CreatePostForm = z.infer<typeof mutationPostFormSchema>;
@@ -58,6 +66,7 @@ export function CreatePost() {
       title: '',
       description: '',
       content: '',
+      tag: '',
     },
   });
 
@@ -73,9 +82,9 @@ export function CreatePost() {
         title: 'Create post successfully',
       });
       navigate('/');
-    } catch (error) {
+    } catch (error: unknown) {
       toast({
-        title: 'Create post failed',
+        title: (error as ApiErrorResponse).data?.message,
       });
     }
   }
@@ -119,6 +128,33 @@ export function CreatePost() {
                       <FormControl>
                         <Input placeholder="Post description" {...field} />
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={createForm.control}
+                  name="tag"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tag</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Tag" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {tags.map((tag) => (
+                            <SelectItem key={tag} value={tag}>
+                              {tag}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}

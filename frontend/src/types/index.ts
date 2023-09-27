@@ -5,6 +5,7 @@ export type Post = {
   content: string;
   created_at?: string;
   author_id?: number;
+  tag: string;
 };
 
 /**
@@ -41,7 +42,7 @@ export type ApiLoginResponse = AccessToken & {
   };
 };
 
-export type CreatePostResponse = {
+export type ApiCreatePostResponse = {
   id: number;
   created_at: Date;
   updated_at: Date;
@@ -51,6 +52,15 @@ export type CreatePostResponse = {
   author_id: number;
 };
 
-export type UpdatePostResponse = Partial<CreatePostResponse>;
+export type ApiUpdatePostResponse = Partial<ApiCreatePostResponse>;
 
-export type DeletePostResponse = Partial<CreatePostResponse>;
+export type ApiDeletePostResponse = Partial<ApiCreatePostResponse>;
+
+export type ApiErrorResponse = Partial<{
+  data: {
+    error: string;
+    message: string;
+    statusCode: number;
+  };
+  status: number;
+}>;

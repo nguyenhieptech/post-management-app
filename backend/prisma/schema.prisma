@@ -14,11 +14,16 @@ model Post {
   id          Int      @id @default(autoincrement())
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
-  title       String
+  title       String   @unique
   description String
   content     String?
   author      User?    @relation(fields: [author_id], references: [id])
   author_id   Int?
+  tag         String
+  // For now, tag will be a simple string
+  // If we want to extend feature like tag management (CRUD), we can add a tag model
+  // tag         Tag?     @relation(fields: [tag_id], references: [id])
+  // tag_id      Int?
 
   @@map("posts")
 }
@@ -33,3 +38,12 @@ model User {
 
   @@map("users")
 }
+
+// model Tag {
+//   id         Int      @id @default(autoincrement())
+//   created_at DateTime @default(now())
+//   updated_at DateTime @updatedAt
+//   name       String
+//   Post       Post[]
+//   @@map("tags")
+// }
