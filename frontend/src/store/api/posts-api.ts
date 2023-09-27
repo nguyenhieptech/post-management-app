@@ -1,4 +1,4 @@
-import { CreatePostResponse, DeletePostResponse, Post } from '@/types';
+import { ApiCreatePostResponse, ApiDeletePostResponse, Post } from '@/types';
 import { baseApi } from './base-api';
 
 const postsUrl = 'posts';
@@ -22,8 +22,9 @@ export const postsApi = baseApi.injectEndpoints({
           id,
         },
       }),
+      providesTags: ['Posts'],
     }),
-    createPost: builder.mutation<CreatePostResponse, Post>({
+    createPost: builder.mutation<ApiCreatePostResponse, Post>({
       query: (body) => ({
         url: postsUrl,
         method: 'POST',
@@ -31,7 +32,7 @@ export const postsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Posts'],
     }),
-    updatePost: builder.mutation<DeletePostResponse, Post>({
+    updatePost: builder.mutation<ApiDeletePostResponse, Post>({
       query: ({ id, ...body }) => ({
         url: `${postsUrl}/${id}`,
         method: 'PATCH',
@@ -39,7 +40,7 @@ export const postsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Posts'],
     }),
-    deletePost: builder.mutation<DeletePostResponse, number | string>({
+    deletePost: builder.mutation<ApiDeletePostResponse, number | string>({
       query: (id) => ({
         url: `${postsUrl}/${id}`,
         method: 'DELETE',
