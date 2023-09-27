@@ -1,18 +1,32 @@
 import { CreatePostDto, UpdatePostDto } from '@/posts/dto';
 import { PrismaService } from '@/prisma/prisma.service';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class PostsService {
   constructor(private prisma: PrismaService) {}
 
   async create(createPostDto: CreatePostDto) {
+    // Post title must be unique
+    const existingPost = await this.prisma.post.findUnique({
+      where: {
+        title: createPostDto.title,
+      },
+    });
+
+    if (existingPost) {
+      throw new BadRequestException(
+        'A post with this title already existed. Please choose a new one.'
+      );
+    }
+
     const newPost = await this.prisma.post.create({
       data: {
         title: createPostDto.title,
         description: createPostDto.description,
         content: createPostDto.content,
         author_id: createPostDto.author_id,
+        tag: createPostDto.tag,
       },
     });
 
