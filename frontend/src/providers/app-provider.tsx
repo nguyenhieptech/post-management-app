@@ -6,7 +6,7 @@ import { ToasterProvider } from './toaster-provider';
 export function AppProvider() {
   return (
     <StoreProvider>
-      <ThemeProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <RoutingProvider />
         <ToasterProvider />
       </ThemeProvider>
