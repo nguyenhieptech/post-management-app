@@ -90,7 +90,7 @@ export function CreatePost() {
   }
 
   return (
-    <Container className="mt-16 lg:mt-20 xl:mx-48 md:mx-16">
+    <Container className="mt-16 md:mx-16 lg:mt-20 xl:mx-48">
       <div className="block space-y-6 p-10 pb-16">
         <div className="space-y-2">
           <h2 className="text-4xl font-bold">Create Post</h2>
@@ -172,7 +172,7 @@ export function CreatePost() {
                     </FormItem>
                   )}
                 />
-                <div className="flex flex-col md:flex-row justify-between md:space-x-4 space-y-4 md:space-y-0">
+                <div className="flex flex-col justify-between space-y-4 md:flex-row md:space-x-4 md:space-y-0">
                   <Button className="md:w-1/2" type="submit">
                     Create post
                   </Button>

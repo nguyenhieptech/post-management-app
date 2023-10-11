@@ -9,7 +9,7 @@ export function Prose({ children, className }: Props) {
   return (
     <div
       className={cn(
-        'prose dark:prose-invert text-zinc-600 dark:text-zinc-400 leading-7',
+        'prose leading-7 text-zinc-600 dark:prose-invert dark:text-zinc-400',
         className
       )}
     >

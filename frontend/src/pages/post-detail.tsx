@@ -136,12 +136,12 @@ export function PostDetail() {
                 {authorId === post.data?.author_id && (
                   <DropdownMenu>
                     <DropdownMenuTrigger>
-                      <div className="hover:cursor-pointer flex items-center justify-between dark:bg-zinc-800 py-2 px-4 rounded-md">
+                      <div className="flex items-center justify-between rounded-md px-4 py-2 hover:cursor-pointer dark:bg-zinc-800">
                         <DotsHorizontalIcon className="h-4 w-4" />
                       </div>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
-                      className="bg-white dark:bg-zinc-900 w-40"
+                      className="w-40 bg-white dark:bg-zinc-900"
                       align="end"
                     >
                       <DropdownMenuLabel>Actions</DropdownMenuLabel>
@@ -231,7 +231,7 @@ export function PostDetail() {
                   </FormItem>
                 )}
               />
-              <div className="flex flex-col md:flex-row justify-between md:space-x-4 space-y-4 md:space-y-0">
+              <div className="flex flex-col justify-between space-y-4 md:flex-row md:space-x-4 md:space-y-0">
                 <Button className="md:w-1/2" type="submit">
                   Edit post
                 </Button>
@@ -255,7 +255,7 @@ export function PostDetail() {
         open={isDeleteDialogOpen}
         onOpenChange={setIsDeleteDialogConfirmOpen}
       >
-        <DialogContent className="h-60 sm:h-48 dark:bg-zinc-900">
+        <DialogContent className="h-60 dark:bg-zinc-900 sm:h-48">
           <DialogHeader>
             <DialogTitle>
               Are you sure you want to delete this post?
@@ -266,7 +266,7 @@ export function PostDetail() {
             </DialogDescription>
           </DialogHeader>
           <Separator className="my-2" />
-          <div className="flex flex-col md:flex-row justify-between md:space-x-4 space-y-4 md:space-y-0">
+          <div className="flex flex-col justify-between space-y-4 md:flex-row md:space-x-4 md:space-y-0">
             <Button
               className="md:w-1/2"
               variant="destructive"

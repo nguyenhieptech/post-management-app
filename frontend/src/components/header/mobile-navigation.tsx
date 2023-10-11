@@ -47,7 +47,7 @@ export function MobileNavigation() {
           <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
         </PopoverTrigger>
 
-        <PopoverContent className="w-44 fixed top-2 z-50 origin-top rounded-md bg-white p-8 ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800">
+        <PopoverContent className="fixed top-2 z-50 w-44 origin-top rounded-md bg-white p-8 ring-1 ring-zinc-900/5 dark:bg-zinc-900 dark:ring-zinc-800">
           <div className="flex flex-row-reverse items-center justify-between">
             <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
             <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">Navigation</h2>
@@ -61,7 +61,7 @@ export function MobileNavigation() {
                   <MobileNavItem to="/create-post">Create post</MobileNavItem>
                   <div
                     onClick={logoutUser}
-                    className="hover:cursor-pointer block py-2 text-sm hover:text-teal-500 dark:hover:text-teal-400"
+                    className="block py-2 text-sm hover:cursor-pointer hover:text-teal-500 dark:hover:text-teal-400"
                   >
                     Logout
                   </div>

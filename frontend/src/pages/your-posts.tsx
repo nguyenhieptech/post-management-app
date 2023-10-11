@@ -32,7 +32,7 @@ export function YourPosts() {
       title="Being up-to-date with software design, start-up ideas and the software industry generally. Yeah yeah I know, it sounds boring."
       intro="This is an application that allows users to create, view, and manage posts."
     >
-      <div className="flex justify-end mb-6">
+      <div className="mb-6 flex justify-end">
         <Select onValueChange={(value) => setTagList(value)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Filter by Tag" />
