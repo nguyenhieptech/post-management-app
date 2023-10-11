@@ -15,7 +15,7 @@ export function ModeToggle() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="group hover:bg-zinc-50 rounded-full bg-white/90 p-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+          className="group rounded-full bg-white/90 p-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition hover:bg-zinc-50 dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
           size="icon"
           type="button"
           aria-label="Toggle dark mode"
@@ -25,7 +25,7 @@ export function ModeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-white dark:bg-zinc-900/95 w-32">
+      <DropdownMenuContent align="end" className="w-32 bg-white dark:bg-zinc-900/95">
         <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>

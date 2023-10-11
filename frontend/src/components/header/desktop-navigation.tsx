@@ -47,7 +47,7 @@ export function DesktopNavigation() {
             <DesktopNavItem to="create-post">Create Post</DesktopNavItem>
             <div
               onClick={logoutUser}
-              className="hover:cursor-pointer relative block px-3 py-2 transition hover:text-teal-500 dark:hover:text-teal-400"
+              className="relative block px-3 py-2 transition hover:cursor-pointer hover:text-teal-500 dark:hover:text-teal-400"
             >
               Logout
             </div>
