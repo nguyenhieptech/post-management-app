@@ -5,7 +5,9 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   // https://docs.nestjs.com/techniques/performance#adapter
-  const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
+  const fastifyAdapter = new FastifyAdapter();
+
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule, fastifyAdapter);
 
   // https://docs.nestjs.com/faq/global-prefix
   app.setGlobalPrefix('api');
