@@ -16,8 +16,8 @@ async function bootstrap() {
   app.enableCors();
 
   // https://docs.nestjs.com/openapi/introduction
-  // Hint: To generate and download a Swagger JSON file, navigate to http://localhost:3000/swagger-json
-  // (assuming that your Swagger documentation is available under http://localhost:3000/swagger).
+  // Hint: To generate and download a Swagger JSON file, navigate to http://localhost:3333/swagger-json
+  // (assuming that your Swagger documentation is available under http://localhost:3333/swagger).
   const config = new DocumentBuilder()
     .setTitle('Post Management App')
     .setDescription('Post Management App description')
