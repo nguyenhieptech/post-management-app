@@ -1,4 +1,4 @@
-import { JwtGuard } from '@/auth/guard';
+import { JwtGuard } from '@/auth/jwt.guard';
 import { CreatePostDto, PostAuthorDto, UpdatePostDto } from '@/posts/dto';
 import { PostsService } from '@/posts/posts.service';
 import {

@@ -1,4 +1,4 @@
-import { AuthDto } from '@/auth/dto';
+import { AuthDto } from '@/auth/auth.dto';
 import { PrismaService } from '@/prisma/prisma.service';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
