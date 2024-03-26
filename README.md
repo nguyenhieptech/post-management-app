@@ -12,7 +12,6 @@ Some preview images:
 
 ![image](https://github.com/nguyenhieptech/post-management-app/assets/48057064/5388fe68-d456-4b96-b610-0a3af294e387)
 
-
 ## Backend
 
 - Techstack: NestJS (Fastify), Prisma ORM
@@ -24,7 +23,7 @@ Some preview images:
 cd backend
 
 # Install dependencies
-yarn install
+pnpm i
 ```
 
 - After that, set up a local Postgresql database. This step varies on different systems. Find online tutorials to set up. Then, create a `.env` file and change update your database URL.
@@ -39,26 +38,26 @@ JWT_SECRET="Change to your JWT secret"
 ```bash
 # Generate prisma
 npx prisma generate
-# or yarn prisma:generate
+# or pnpm prisma:generate
 
 # Migrate prisma schema to db
 npx prisma migrate dev
-# or yarn prisma:migrate
+# or pnpm prisma:migrate
 
 # Seed database if needed
 npx prisma db seed
-# or yarn prisma:seed
+# or pnpm prisma:seed
 
 # After that, open prisma studio
 npx prisma studio
-# or yarn prisma:studio
+# or pnpm prisma:studio
 ```
 
 - Run project locally
 
 ```bash
 # Start backend web server
-yarn start:dev
+pnpm start:dev
 ```
 
 - After seeding database successfully, there are 2 initial users, each user has 7 posts. One can login with these accounts, or create a new one.
@@ -84,13 +83,13 @@ yarn start:dev
 cd frontend
 
 # Install dependencies
-yarn install
+pnpm i
 ```
 
 - After that, run project locally
 
 ```bash
-yarn dev
+pnpm start:dev
 ```
 
 - Once again, one can login with these users:

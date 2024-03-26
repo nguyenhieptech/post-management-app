@@ -5,7 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as argon from 'argon2';
 
-@Injectable({})
+@Injectable()
 export class AuthService {
   constructor(
     private prismaService: PrismaService,
@@ -37,7 +37,7 @@ export class AuthService {
         },
       };
     } catch (error) {
-      if (error.code == 'P2002') {
+      if (error.code === 'P2002') {
         // throw new ForbiddenException(error.message)
         throw new ForbiddenException('User with this email already exists');
       }
@@ -62,7 +62,7 @@ export class AuthService {
     const accessToken = await this.signJwtToken(user.id, user.email);
 
     return {
-      ...accessToken,
+      access_token: accessToken,
       user_info: {
         id: user.id,
         email: user.email,
@@ -70,17 +70,18 @@ export class AuthService {
     };
   }
 
-  async signJwtToken(userId: number, email: string): Promise<{ access_token: string }> {
-    const payload = {
-      sub: userId,
-      email,
-    };
-    const jwtString = await this.jwtService.signAsync(payload, {
-      expiresIn: '60m',
-      secret: this.configService.get('JWT_SECRET'),
-    });
-    return {
-      access_token: jwtString,
-    };
+  async signJwtToken(userId: number, email: string): Promise<string> {
+    // https://docs.nestjs.com/security/authentication#jwt-token
+    const jwtString = await this.jwtService.signAsync(
+      {
+        sub: userId,
+        email,
+      },
+      {
+        expiresIn: '60m',
+        secret: this.configService.get('JWT_SECRET'),
+      }
+    );
+    return jwtString;
   }
 }
