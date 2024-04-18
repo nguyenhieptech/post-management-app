@@ -1,4 +1,4 @@
-import { AppLayout } from '@/components';
+import { AppLayout } from "@/components";
 import {
   CreatePost,
   Home,
@@ -7,8 +7,8 @@ import {
   PostDetail,
   Register,
   YourPosts,
-} from '@/pages';
-import { useAppSelector } from '@/store';
+} from "@/pages";
+import { useAppSelector } from "@/store";
 import {
   Navigate,
   Outlet,
@@ -17,7 +17,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   useLocation,
-} from 'react-router-dom';
+} from "react-router-dom";
 
 // React Protected Routes | Role-Based Authorization | React Router v6
 // https://youtu.be/oUZjO00NkhY?si=-AESslJMW4xz-qlu

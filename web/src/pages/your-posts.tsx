@@ -1,20 +1,20 @@
-import { PostPreview, SimpleLayout } from '@/components';
+import { PostPreview, SimpleLayout } from "@/components";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui';
-import { useAppSelector } from '@/store';
-import { useGetPostsByAuthorQuery } from '@/store/api';
-import { useEffect, useState } from 'react';
-import { tags } from '.';
+} from "@/components/ui";
+import { useAppSelector } from "@/store";
+import { useGetPostsByAuthorQuery } from "@/store/api";
+import { useEffect, useState } from "react";
+import { tags } from ".";
 
 export function YourPosts() {
   const authorId = useAppSelector((state) => state.auth.userInfo?.id);
   const postsByAuthorQuery = useGetPostsByAuthorQuery(authorId!);
-  const [tagList, setTagList] = useState('React');
+  const [tagList, setTagList] = useState("React");
   const [postsFilteredByTag, setPostsFilteredByTag] = useState(() => {
     return postsByAuthorQuery.data;
   });

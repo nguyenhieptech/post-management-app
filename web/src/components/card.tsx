@@ -1,20 +1,20 @@
-import { ChevronRightIcon } from '@/assets/icons';
-import { cn } from '@/utils';
-import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
-import { NavLink, NavLinkProps } from 'react-router-dom';
+import { ChevronRightIcon } from "@/assets/icons";
+import { cn } from "@/utils";
+import { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
+import { NavLink, NavLinkProps } from "react-router-dom";
 
-export function Card<T extends ElementType = 'div'>({
+export function Card<T extends ElementType = "div">({
   as,
   className,
   children,
-}: Omit<ComponentPropsWithoutRef<T>, 'as' | 'className'> & {
+}: Omit<ComponentPropsWithoutRef<T>, "as" | "className"> & {
   as?: T;
   className?: string;
 }) {
-  const Component = as ?? 'div';
+  const Component = as ?? "div";
 
   return (
-    <Component className={cn('group relative flex flex-col items-start', className)}>
+    <Component className={cn("group relative flex flex-col items-start", className)}>
       {children}
     </Component>
   );
@@ -42,7 +42,7 @@ type CardTitleProps = {
   children: ReactNode;
 };
 
-Card.Title = function CardTitle({ as: Component = 'h2', to, children }: CardTitleProps) {
+Card.Title = function CardTitle({ as: Component = "h2", to, children }: CardTitleProps) {
   return (
     <Component className="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
       {to ? <Card.Link to={to}>{children}</Card.Link> : children}
@@ -79,7 +79,7 @@ type CardEyebrowProps = {
 };
 
 Card.Eyebrow = function CardEyebrow({
-  as: Component = 'p',
+  as: Component = "p",
   decorate = false,
   className,
   children,
@@ -88,9 +88,9 @@ Card.Eyebrow = function CardEyebrow({
   return (
     <Component
       className={cn(
-        'relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500',
+        "relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500",
         className,
-        decorate && 'pl-3.5'
+        decorate && "pl-3.5"
       )}
       {...props}
     >

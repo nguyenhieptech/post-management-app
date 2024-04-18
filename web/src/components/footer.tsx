@@ -1,6 +1,6 @@
-import { Container } from '@/components';
-import { useAppSelector } from '@/store';
-import { NavLink } from 'react-router-dom';
+import { Container } from "@/components";
+import { useAppSelector } from "@/store";
+import { NavLink } from "react-router-dom";
 
 export function Footer() {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);

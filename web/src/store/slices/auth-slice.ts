@@ -1,5 +1,5 @@
-import { ApiLoginResponse, ApiRegisterResponse } from '@/types';
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ApiLoginResponse, ApiRegisterResponse } from "@/types";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export type AuthStateSlice = {
   isLoggedIn: boolean;
@@ -17,7 +17,7 @@ const initialState: AuthStateSlice = {
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     logout: (state) => {

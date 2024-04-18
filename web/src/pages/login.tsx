@@ -8,16 +8,16 @@ import {
   FormMessage,
   Input,
   toast,
-} from '@/components/ui';
-import { useAppDispatch } from '@/store';
-import { useLoginMutation } from '@/store/api';
-import { login } from '@/store/slices';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { EyeOpenIcon } from '@radix-ui/react-icons';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { NavLink, useNavigate } from 'react-router-dom';
-import * as z from 'zod';
+} from "@/components/ui";
+import { useAppDispatch } from "@/store";
+import { useLoginMutation } from "@/store/api";
+import { login } from "@/store/slices";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { EyeOpenIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { NavLink, useNavigate } from "react-router-dom";
+import * as z from "zod";
 
 const loginFormSchema = z.object({
   email: z.string().min(2).email().max(50),
@@ -38,8 +38,8 @@ export function Login() {
   const loginForm = useForm<LoginForm>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -48,12 +48,12 @@ export function Login() {
       const response = await loginMutation(loginFormValues).unwrap();
       dispatch(login(response));
       toast({
-        title: 'Login successfully',
+        title: "Login successfully",
       });
-      navigate('/');
+      navigate("/");
     } catch {
       toast({
-        title: 'Login failed',
+        title: "Login failed",
       });
     }
   }
@@ -99,7 +99,7 @@ export function Login() {
                       <FormLabel>Password</FormLabel>
                       <FormControl>
                         <Input
-                          type={isPasswordShown ? 'text' : 'password'}
+                          type={isPasswordShown ? "text" : "password"}
                           {...field}
                         />
                       </FormControl>
@@ -120,7 +120,7 @@ export function Login() {
         </div>
 
         <p className="mt-10 text-center text-sm text-zinc-400">
-          Not a member?{' '}
+          Not a member?{" "}
           <NavLink
             to="/register"
             className="font-semibold leading-6 text-teal-400 transition hover:text-teal-300"

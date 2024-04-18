@@ -1,4 +1,4 @@
-import { AppProvider } from './providers';
+import { AppProvider } from "./providers";
 
 function App() {
   return <AppProvider />;

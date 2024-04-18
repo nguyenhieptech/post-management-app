@@ -1,6 +1,6 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef } from "react";
 
-export function CloseIcon(props: ComponentPropsWithoutRef<'svg'>) {
+export function CloseIcon(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
@@ -15,7 +15,7 @@ export function CloseIcon(props: ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export function ChevronDownIcon(props: ComponentPropsWithoutRef<'svg'>) {
+export function ChevronDownIcon(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 8 6" aria-hidden="true" {...props}>
       <path
@@ -29,7 +29,7 @@ export function ChevronDownIcon(props: ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export function ChevronRightIcon(props: ComponentPropsWithoutRef<'svg'>) {
+export function ChevronRightIcon(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
       <path
@@ -42,7 +42,7 @@ export function ChevronRightIcon(props: ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export function SunIcon(props: ComponentPropsWithoutRef<'svg'>) {
+export function SunIcon(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -61,7 +61,7 @@ export function SunIcon(props: ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export function MoonIcon(props: ComponentPropsWithoutRef<'svg'>) {
+export function MoonIcon(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
@@ -74,7 +74,7 @@ export function MoonIcon(props: ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-export function ArrowLeftIcon(props: ComponentPropsWithoutRef<'svg'>) {
+export function ArrowLeftIcon(props: ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
       <path

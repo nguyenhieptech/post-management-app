@@ -8,16 +8,16 @@ import {
   FormMessage,
   Input,
   toast,
-} from '@/components/ui';
-import { useAppDispatch } from '@/store';
-import { useRegisterMutation } from '@/store/api';
-import { register } from '@/store/slices';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { EyeOpenIcon } from '@radix-ui/react-icons';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { NavLink, useNavigate } from 'react-router-dom';
-import * as z from 'zod';
+} from "@/components/ui";
+import { useAppDispatch } from "@/store";
+import { useRegisterMutation } from "@/store/api";
+import { register } from "@/store/slices";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { EyeOpenIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { NavLink, useNavigate } from "react-router-dom";
+import * as z from "zod";
 
 const registerFormSchema = z.object({
   email: z.string().min(2).email().max(50),
@@ -38,8 +38,8 @@ export function Register() {
   const registerForm = useForm<RegisterForm>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -48,12 +48,12 @@ export function Register() {
       const response = await registerMutation(registerFormValues).unwrap();
       dispatch(register(response));
       toast({
-        title: 'Register successfully',
+        title: "Register successfully",
       });
-      navigate('/');
+      navigate("/");
     } catch {
       toast({
-        title: 'Register failed',
+        title: "Register failed",
       });
     }
   }
@@ -99,7 +99,7 @@ export function Register() {
                       <FormLabel>Password</FormLabel>
                       <FormControl>
                         <Input
-                          type={isPasswordShown ? 'text' : 'password'}
+                          type={isPasswordShown ? "text" : "password"}
                           {...field}
                         />
                       </FormControl>
@@ -120,7 +120,7 @@ export function Register() {
         </div>
 
         <p className="mt-10 text-center text-sm text-zinc-400">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <NavLink
             to="/login"
             className="font-semibold leading-6 text-teal-400 transition hover:text-teal-300"
