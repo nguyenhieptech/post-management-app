@@ -1,6 +1,6 @@
-import { Card } from '@/components';
-import { Post } from '@/types';
-import { formatDate } from '@/utils';
+import { Card } from "@/components";
+import { Post } from "@/types";
+import { formatDate } from "@/utils";
 
 type Props = {
   post: Post;

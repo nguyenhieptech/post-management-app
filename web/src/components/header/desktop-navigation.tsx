@@ -1,12 +1,12 @@
-import { useAppDispatch, useAppSelector } from '@/store';
-import { baseApi } from '@/store/api';
-import { logout } from '@/store/slices';
-import { cn } from '@/utils';
-import { NavLink, NavLinkProps } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from "@/store";
+import { baseApi } from "@/store/api";
+import { logout } from "@/store/slices";
+import { cn } from "@/utils";
+import { NavLink, NavLinkProps } from "react-router-dom";
 
 type DesktopNavItemProps = NavLinkProps & {
   children: React.ReactNode;
-  to: NavLinkProps['to'];
+  to: NavLinkProps["to"];
 };
 
 function DesktopNavItem({ to, children, ...props }: DesktopNavItemProps) {
@@ -14,10 +14,10 @@ function DesktopNavItem({ to, children, ...props }: DesktopNavItemProps) {
     <NavLink
       className={({ isActive }) =>
         cn(
-          'relative block px-3 py-2 transition',
+          "relative block px-3 py-2 transition",
           isActive
-            ? 'text-teal-500 dark:text-teal-400'
-            : 'hover:text-teal-500 dark:hover:text-teal-400'
+            ? "text-teal-500 dark:text-teal-400"
+            : "hover:text-teal-500 dark:hover:text-teal-400"
         )
       }
       to={to}

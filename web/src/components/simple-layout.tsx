@@ -1,5 +1,5 @@
-import { Container } from '@/components';
-import React from 'react';
+import { Container } from "@/components";
+import React from "react";
 
 type Props = {
   title: string;

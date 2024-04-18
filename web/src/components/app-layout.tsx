@@ -1,14 +1,14 @@
-import { Footer, Header } from '@/components';
-import { cn } from '@/utils';
-import { Outlet } from 'react-router-dom';
+import { Footer, Header } from "@/components";
+import { cn } from "@/utils";
+import { Outlet } from "react-router-dom";
 
 export function AppLayout() {
   return (
     <>
       <div
         className={cn(
-          'fixed inset-0 flex justify-center sm:px-8',
-          process.env.NODE_ENV === 'development' ? 'debug-screens' : ''
+          "fixed inset-0 flex justify-center sm:px-8",
+          process.env.NODE_ENV === "development" ? "debug-screens" : ""
         )}
       >
         <div className="flex w-full max-w-7xl lg:px-8">

@@ -1,20 +1,20 @@
-import { PostPreview, SimpleLayout } from '@/components';
+import { PostPreview, SimpleLayout } from "@/components";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui';
-import { useGetPostsQuery } from '@/store/api';
-import { useEffect, useState } from 'react';
+} from "@/components/ui";
+import { useGetPostsQuery } from "@/store/api";
+import { useEffect, useState } from "react";
 
 /** Mock tag data, we can replace this by fetching tags from an API for example */
-export const tags = ['React', 'Vue', 'NodeJS', 'Language'];
+export const tags = ["React", "Vue", "NodeJS", "Language"];
 
 export function Home() {
   const postsQuery = useGetPostsQuery();
-  const [tagList, setTagList] = useState('React');
+  const [tagList, setTagList] = useState("React");
   const [postsFilteredByTag, setPostsFilteredByTag] = useState(() => {
     return postsQuery.data;
   });

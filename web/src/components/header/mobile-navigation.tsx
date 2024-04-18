@@ -1,14 +1,14 @@
-import { ChevronDownIcon, CloseIcon } from '@/assets/icons';
-import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@/components/ui';
-import { useAppDispatch, useAppSelector } from '@/store';
-import { baseApi } from '@/store/api';
-import { logout } from '@/store/slices';
-import { cn } from '@/utils';
-import { NavLink, NavLinkProps } from 'react-router-dom';
+import { ChevronDownIcon, CloseIcon } from "@/assets/icons";
+import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from "@/components/ui";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { baseApi } from "@/store/api";
+import { logout } from "@/store/slices";
+import { cn } from "@/utils";
+import { NavLink, NavLinkProps } from "react-router-dom";
 
 type MobileNavItemProps = NavLinkProps & {
   children: React.ReactNode;
-  to?: NavLinkProps['to'];
+  to?: NavLinkProps["to"];
 };
 
 function MobileNavItem({ to, children, ...props }: MobileNavItemProps) {
@@ -16,10 +16,10 @@ function MobileNavItem({ to, children, ...props }: MobileNavItemProps) {
     <NavLink
       className={({ isActive }) =>
         cn(
-          'block py-2 text-sm',
+          "block py-2 text-sm",
           isActive
-            ? 'text-teal-500 dark:text-teal-400'
-            : 'hover:text-teal-500 dark:hover:text-teal-400'
+            ? "text-teal-500 dark:text-teal-400"
+            : "hover:text-teal-500 dark:hover:text-teal-400"
         )
       }
       to={to}

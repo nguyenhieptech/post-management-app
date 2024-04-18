@@ -1,4 +1,4 @@
-import { Container } from '@/components';
+import { Container } from "@/components";
 import {
   Button,
   Form,
@@ -16,40 +16,40 @@ import {
   Separator,
   Textarea,
   toast,
-} from '@/components/ui';
-import { useAppSelector } from '@/store';
-import { useCreatePostMutation } from '@/store/api';
-import { ApiErrorResponse } from '@/types';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import * as z from 'zod';
-import { tags } from '.';
+} from "@/components/ui";
+import { useAppSelector } from "@/store";
+import { useCreatePostMutation } from "@/store/api";
+import { ApiErrorResponse } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import * as z from "zod";
+import { tags } from ".";
 
 export const mutationPostFormSchema = z.object({
   title: z
     .string()
     .min(2, {
-      message: 'Title must be at least 2 characters.',
+      message: "Title must be at least 2 characters.",
     })
     .max(400, {
-      message: 'Title must not be longer than 400 characters.',
+      message: "Title must not be longer than 400 characters.",
     }),
   description: z
     .string()
     .min(10, {
-      message: 'Description must be at least 10 characters.',
+      message: "Description must be at least 10 characters.",
     })
     .max(3000, {
-      message: 'Description must not be longer than 3000 characters.',
+      message: "Description must not be longer than 3000 characters.",
     }),
   content: z
     .string()
     .min(100, {
-      message: 'Content must be at least 100 characters.',
+      message: "Content must be at least 100 characters.",
     })
     .max(10000, {
-      message: 'Content must not be longer than 10000 characters.',
+      message: "Content must not be longer than 10000 characters.",
     }),
   tag: z.string(),
 });
@@ -63,10 +63,10 @@ export function CreatePost() {
   const createForm = useForm<CreatePostForm>({
     resolver: zodResolver(mutationPostFormSchema),
     defaultValues: {
-      title: '',
-      description: '',
-      content: '',
-      tag: '',
+      title: "",
+      description: "",
+      content: "",
+      tag: "",
     },
   });
 
@@ -79,9 +79,9 @@ export function CreatePost() {
         ...createPostFormValues,
       }).unwrap();
       toast({
-        title: 'Create post successfully',
+        title: "Create post successfully",
       });
-      navigate('/');
+      navigate("/");
     } catch (error: unknown) {
       toast({
         title: (error as ApiErrorResponse).data?.message,
@@ -179,7 +179,7 @@ export function CreatePost() {
                   <Button
                     className="md:w-1/2"
                     variant="outline"
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate("/")}
                   >
                     Back to home
                   </Button>

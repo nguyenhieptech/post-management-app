@@ -1,9 +1,9 @@
-import { imgRegistry } from '@/assets/img';
-import { Container } from '@/components';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui';
-import { DesktopNavigation } from './desktop-navigation';
-import { MobileNavigation } from './mobile-navigation';
-import { ModeToggle } from './mode-toggle';
+import { imgRegistry } from "@/assets/img";
+import { Container } from "@/components";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui";
+import { DesktopNavigation } from "./desktop-navigation";
+import { MobileNavigation } from "./mobile-navigation";
+import { ModeToggle } from "./mode-toggle";
 
 export function Header() {
   return (

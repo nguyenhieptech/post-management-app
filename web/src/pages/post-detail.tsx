@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-import { ArrowLeftIcon } from '@/assets/icons';
-import { Container, Prose } from '@/components';
+import { ArrowLeftIcon } from "@/assets/icons";
+import { Container, Prose } from "@/components";
 import {
   Button,
   Dialog,
@@ -23,25 +23,25 @@ import {
   Separator,
   Textarea,
   toast,
-} from '@/components/ui';
-import { mutationPostFormSchema } from '@/pages';
-import { useAppSelector } from '@/store';
+} from "@/components/ui";
+import { mutationPostFormSchema } from "@/pages";
+import { useAppSelector } from "@/store";
 import {
   useDeletePostMutation,
   useGetPostByIdQuery,
   useUpdatePostMutation,
-} from '@/store/api';
-import { formatDate } from '@/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
+} from "@/store/api";
+import { formatDate } from "@/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   DotsHorizontalIcon,
   Pencil2Icon,
   TrashIcon,
-} from '@radix-ui/react-icons';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
-import * as z from 'zod';
+} from "@radix-ui/react-icons";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
+import * as z from "zod";
 
 type EditPostForm = z.infer<typeof mutationPostFormSchema>;
 
@@ -66,9 +66,9 @@ export function PostDetail() {
   // Set default form values
   useEffect(() => {
     if (isEditDialogOpen) {
-      editForm.setValue('title', post.data?.title!);
-      editForm.setValue('description', post.data?.description!);
-      editForm.setValue('content', post.data?.content!);
+      editForm.setValue("title", post.data?.title!);
+      editForm.setValue("description", post.data?.description!);
+      editForm.setValue("content", post.data?.content!);
       editForm.clearErrors();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,13 +80,13 @@ export function PostDetail() {
     try {
       await updatePostMutation({ ...editPostValues, id: postId }).unwrap();
       toast({
-        title: 'Update post successfully',
+        title: "Update post successfully",
       });
       setIsEditDialogConfirmOpen(false);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       toast({
-        title: 'Update post failed. Please try again',
+        title: "Update post failed. Please try again",
       });
     }
   }
@@ -96,13 +96,13 @@ export function PostDetail() {
     try {
       await deletePostMutation(postId!).unwrap();
       toast({
-        title: 'Delete post successfully',
+        title: "Delete post successfully",
       });
       setIsDeleteDialogConfirmOpen(false);
-      navigate('/');
+      navigate("/");
     } catch (error) {
       toast({
-        title: 'Delete post failed. Please try again',
+        title: "Delete post failed. Please try again",
       });
     }
   }
