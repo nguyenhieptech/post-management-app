@@ -1,9 +1,9 @@
-import { AuthDto } from '@/auth/auth.dto';
-import { PrismaService } from '@/prisma/prisma.service';
-import { ForbiddenException, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { JwtService } from '@nestjs/jwt';
-import * as argon from 'argon2';
+import { AuthDto } from "@/auth/auth.dto";
+import { PrismaService } from "@/prisma/prisma.service";
+import { ForbiddenException, Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import { JwtService } from "@nestjs/jwt";
+import * as argon from "argon2";
 
 @Injectable()
 export class AuthService {
@@ -37,9 +37,9 @@ export class AuthService {
         },
       };
     } catch (error) {
-      if (error.code === 'P2002') {
+      if (error.code === "P2002") {
         // throw new ForbiddenException(error.message)
-        throw new ForbiddenException('User with this email already exists');
+        throw new ForbiddenException("User with this email already exists");
       }
     }
   }
@@ -51,11 +51,11 @@ export class AuthService {
       },
     });
     if (!user) {
-      throw new ForbiddenException('User not found');
+      throw new ForbiddenException("User not found");
     }
     const passwordMatched = await argon.verify(user.hashed_password, authDto.password);
     if (!passwordMatched) {
-      throw new ForbiddenException('Incorrect password');
+      throw new ForbiddenException("Incorrect password");
     }
     delete user.hashed_password;
 
@@ -78,8 +78,8 @@ export class AuthService {
         email,
       },
       {
-        expiresIn: '60m',
-        secret: this.configService.get('JWT_SECRET'),
+        expiresIn: "60m",
+        secret: this.configService.get("JWT_SECRET"),
       }
     );
     return jwtString;

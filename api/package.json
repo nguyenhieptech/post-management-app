@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format:write": "prettier --write \"{src,test,prisma}/**/*.ts\" --cache",
+    "format:check": "prettier --check \"{src,test,prisma}/**/*.ts\" --cache",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:dev:swc": "nest start -b swc --watch",

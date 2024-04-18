@@ -1,6 +1,6 @@
-import { CreatePostDto, UpdatePostDto } from '@/posts/dto';
-import { PrismaService } from '@/prisma/prisma.service';
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { CreatePostDto, UpdatePostDto } from "@/posts/dto";
+import { PrismaService } from "@/prisma/prisma.service";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 
 @Injectable()
 export class PostsService {
@@ -16,7 +16,7 @@ export class PostsService {
 
     if (existingPost) {
       throw new BadRequestException(
-        'A post with this title already existed. Please choose a new one.'
+        "A post with this title already existed. Please choose a new one."
       );
     }
 

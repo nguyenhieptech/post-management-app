@@ -1,6 +1,6 @@
-import { JwtGuard } from '@/auth/jwt.guard';
-import { CreatePostDto, PostAuthorDto, UpdatePostDto } from '@/posts/dto';
-import { PostsService } from '@/posts/posts.service';
+import { JwtGuard } from "@/auth/jwt.guard";
+import { CreatePostDto, PostAuthorDto, UpdatePostDto } from "@/posts/dto";
+import { PostsService } from "@/posts/posts.service";
 import {
   Body,
   Controller,
@@ -12,9 +12,9 @@ import {
   Patch,
   Post,
   UseGuards,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
-@Controller('posts')
+@Controller("posts")
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
@@ -31,29 +31,29 @@ export class PostsController {
     return this.postsService.findAll();
   }
 
-  @Post('by-author')
+  @Post("by-author")
   @HttpCode(HttpStatus.OK)
   findAllByAuthor(@Body() postAuthorDto: PostAuthorDto) {
     return this.postsService.findAllByAuthor(postAuthorDto.id);
   }
 
-  @Get(':id')
+  @Get(":id")
   @HttpCode(HttpStatus.OK)
-  findOne(@Param('id') id: string) {
+  findOne(@Param("id") id: string) {
     return this.postsService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch(":id")
   @UseGuards(JwtGuard)
   @HttpCode(HttpStatus.CREATED)
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
+  update(@Param("id") id: string, @Body() updatePostDto: UpdatePostDto) {
     return this.postsService.update(+id, updatePostDto);
   }
 
-  @Delete(':id')
+  @Delete(":id")
   @UseGuards(JwtGuard)
   @HttpCode(HttpStatus.OK)
-  remove(@Param('id') id: string) {
+  remove(@Param("id") id: string) {
     return this.postsService.remove(+id);
   }
 }
