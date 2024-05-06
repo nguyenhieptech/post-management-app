@@ -19,8 +19,8 @@ Some preview images:
 - Set up
 
 ```bash
-# Open a terminal inside backend folder if needed
-cd backend
+# Open a terminal inside backend folder
+cd api
 
 # Install dependencies
 pnpm i
@@ -79,8 +79,8 @@ pnpm start:dev
 - Set up: open a new terminal
 
 ```bash
-# Open a terminal inside frontend folder if needed
-cd frontend
+# Open a terminal inside frontend folder
+cd web
 
 # Install dependencies
 pnpm i
