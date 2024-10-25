@@ -18,7 +18,7 @@ export function YourPosts() {
   const [tagList, setTagList] = useState("React");
 
   // https://react.dev/learn/you-might-not-need-an-effect#caching-expensive-calculations
-  const newFilteredPostsByTag = postsByAuthorQuery.data?.filter(
+  const filteredPostsByTag = postsByAuthorQuery.data?.filter(
     (post) => post.tag === tagList
   );
 
@@ -44,7 +44,7 @@ export function YourPosts() {
 
       <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <div className="flex max-w-3xl flex-col space-y-16">
-          {newFilteredPostsByTag?.map((post) => (
+          {filteredPostsByTag?.map((post) => (
             <PostPreview key={post.id} post={post} />
           ))}
           {/* TODO: Add Skeleton UI */}
