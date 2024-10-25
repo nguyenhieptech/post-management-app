@@ -9,24 +9,18 @@ import {
 } from "@/components/ui/select";
 import { useAppSelector } from "@/store";
 import { useGetPostsByAuthorQuery } from "@/store/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { tags } from "./home";
 
 export function YourPosts() {
   const authorId = useAppSelector((state) => state.auth.userInfo?.id);
   const postsByAuthorQuery = useGetPostsByAuthorQuery(authorId!);
   const [tagList, setTagList] = useState("React");
-  const [postsFilteredByTag, setPostsFilteredByTag] = useState(() => {
-    return postsByAuthorQuery.data;
-  });
 
-  useEffect(() => {
-    const newPostsFiltered = postsByAuthorQuery.data?.filter(
-      (post) => post.tag === tagList
-    );
-    setPostsFilteredByTag(newPostsFiltered);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tagList]);
+  // https://react.dev/learn/you-might-not-need-an-effect#caching-expensive-calculations
+  const newFilteredPostsByTag = postsByAuthorQuery.data?.filter(
+    (post) => post.tag === tagList
+  );
 
   return (
     <SimpleLayout
@@ -50,7 +44,7 @@ export function YourPosts() {
 
       <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <div className="flex max-w-3xl flex-col space-y-16">
-          {postsFilteredByTag?.map((post) => (
+          {newFilteredPostsByTag?.map((post) => (
             <PostPreview key={post.id} post={post} />
           ))}
           {/* TODO: Add Skeleton UI */}
