@@ -1,17 +1,17 @@
+import { Button } from "@/components/ui/button";
 import {
-  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-  toast,
-} from "@/components/ui";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { useAppDispatch } from "@/store";
-import { useLoginMutation } from "@/store/api";
-import { login } from "@/store/slices";
+import { useRegisterMutation } from "@/store/api";
+import { register } from "@/store/slices";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeOpenIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
@@ -19,41 +19,41 @@ import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import * as z from "zod";
 
-const loginFormSchema = z.object({
+const registerFormSchema = z.object({
   email: z.string().min(2).email().max(50),
   password: z.string().min(2).max(50),
 });
-type LoginForm = z.infer<typeof loginFormSchema>;
+type RegisterForm = z.infer<typeof registerFormSchema>;
 
-export function Login() {
+export function Register() {
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   function handleShowPassword() {
-    setIsPasswordShown((prev) => !prev);
+    setIsPasswordShown((previous) => !previous);
   }
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [loginMutation] = useLoginMutation();
+  const [registerMutation] = useRegisterMutation();
 
-  const loginForm = useForm<LoginForm>({
-    resolver: zodResolver(loginFormSchema),
+  const registerForm = useForm<RegisterForm>({
+    resolver: zodResolver(registerFormSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  async function onSubmit(loginFormValues: LoginForm) {
+  async function onSubmit(registerFormValues: RegisterForm) {
     try {
-      const response = await loginMutation(loginFormValues).unwrap();
-      dispatch(login(response));
+      const response = await registerMutation(registerFormValues).unwrap();
+      dispatch(register(response));
       toast({
-        title: "Login successfully",
+        title: "Register successfully",
       });
       navigate("/");
     } catch {
       toast({
-        title: "Login failed",
+        title: "Register failed",
       });
     }
   }
@@ -62,20 +62,20 @@ export function Login() {
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-4xl font-bold leading-9 text-zinc-900 dark:text-zinc-50">
-          Login to your account
+          Join in today
         </h2>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="mx-4 rounded-md border border-zinc-100 bg-white px-6 py-12 shadow dark:border-none dark:bg-zinc-900 sm:rounded-lg sm:px-12">
-          <Form {...loginForm}>
+          <Form {...registerForm}>
             <form
               className="space-y-10"
-              onSubmit={loginForm.handleSubmit(onSubmit)}
+              onSubmit={registerForm.handleSubmit(onSubmit)}
             >
               <div className="space-y-4">
                 <FormField
-                  control={loginForm.control}
+                  control={registerForm.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
@@ -92,7 +92,7 @@ export function Login() {
                   )}
                 />
                 <FormField
-                  control={loginForm.control}
+                  control={registerForm.control}
                   name="password"
                   render={({ field }) => (
                     <FormItem>
@@ -113,19 +113,19 @@ export function Login() {
                 />
               </div>
               <Button className="w-full" type="submit">
-                Sign in
+                Register
               </Button>
             </form>
           </Form>
         </div>
 
         <p className="mt-10 text-center text-sm text-zinc-400">
-          Not a member?{" "}
+          Already have an account?{" "}
           <NavLink
-            to="/register"
+            to="/login"
             className="font-semibold leading-6 text-teal-400 transition hover:text-teal-300"
           >
-            Register now
+            Login now
           </NavLink>
         </p>
       </div>

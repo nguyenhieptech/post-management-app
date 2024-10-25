@@ -1,4 +1,4 @@
-import { Card } from "@/components";
+import { Card } from "@/components/card";
 import { Post } from "@/types";
 import { formatDate } from "@/utils";
 

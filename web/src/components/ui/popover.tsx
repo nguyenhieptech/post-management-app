@@ -1,6 +1,6 @@
 // https://ui.shadcn.com/docs/components/popover
 
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import React from "react";
 

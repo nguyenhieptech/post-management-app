@@ -1,31 +1,26 @@
-import { PostPreview, SimpleLayout } from "@/components";
+import { PostPreview } from "@/components/post-preview";
+import { SimpleLayout } from "@/components/simple-layout";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui";
-import { useGetPostsQuery } from "@/store/api";
-import { useEffect, useState } from "react";
+} from "@/components/ui/select";
+import { useAppSelector } from "@/store";
+import { useGetPostsByAuthorQuery } from "@/store/api";
+import { useState } from "react";
+import { tags } from "./home";
 
-/** Mock tag data, we can replace this by fetching tags from an API for example */
-export const tags = ["React", "Vue", "NodeJS", "Language"];
-
-export function Home() {
-  const postsQuery = useGetPostsQuery();
+export function YourPosts() {
+  const authorId = useAppSelector((state) => state.auth.userInfo?.id);
+  const postsByAuthorQuery = useGetPostsByAuthorQuery(authorId!);
   const [tagList, setTagList] = useState("React");
-  const [postsFilteredByTag, setPostsFilteredByTag] = useState(() => {
-    return postsQuery.data;
-  });
 
-  useEffect(() => {
-    const newPostsFiltered = postsQuery.data?.filter(
-      (post) => post.tag === tagList
-    );
-    setPostsFilteredByTag(newPostsFiltered);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tagList]);
+  // https://react.dev/learn/you-might-not-need-an-effect#caching-expensive-calculations
+  const filteredPostsByTag = postsByAuthorQuery.data?.filter(
+    (post) => post.tag === tagList
+  );
 
   return (
     <SimpleLayout
@@ -49,12 +44,14 @@ export function Home() {
 
       <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <div className="flex max-w-3xl flex-col space-y-16">
-          {postsFilteredByTag?.map((post) => (
+          {filteredPostsByTag?.map((post) => (
             <PostPreview key={post.id} post={post} />
           ))}
           {/* TODO: Add Skeleton UI */}
-          {postsQuery.isLoading ? <div>Loading...</div> : null}
-          {postsQuery.isError ? <div>There were some errors...</div> : null}
+          {postsByAuthorQuery.isLoading ? <div>Loading...</div> : null}
+          {postsByAuthorQuery.isError ? (
+            <div>There were some errors...</div>
+          ) : null}
         </div>
       </div>
     </SimpleLayout>

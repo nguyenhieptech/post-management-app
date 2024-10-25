@@ -1,8 +1,8 @@
 // https://ui.shadcn.com/docs/components/toast
 
 // Inspired by react-hot-toast library
-import type { ToastActionElement, ToastProps } from "@/components/ui";
-import * as React from "react";
+import type { ToastActionElement, ToastProps } from "@/components/ui/toast";
+import React from "react";
 
 const TOAST_LIMIT = 1;
 const TOAST_REMOVE_DELAY = 1000000;

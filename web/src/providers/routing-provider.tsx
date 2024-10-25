@@ -1,13 +1,11 @@
-import { AppLayout } from "@/components";
-import {
-  CreatePost,
-  Home,
-  Login,
-  NotFound,
-  PostDetail,
-  Register,
-  YourPosts,
-} from "@/pages";
+import { CreatePost } from "@/app/create-post";
+import { Home } from "@/app/home";
+import { Login } from "@/app/login";
+import { NotFound } from "@/app/not-found";
+import { PostDetail } from "@/app/post-detail";
+import { Register } from "@/app/register";
+import { YourPosts } from "@/app/your-posts";
+import { AppLayout } from "@/components/app-layout";
 import { useAppSelector } from "@/store";
 import {
   Navigate,

@@ -1,5 +1,5 @@
-import { Container } from "@/components";
-import { Button } from "@/components/ui";
+import { Container } from "@/components/container";
+import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
 
 export function NotFound() {
