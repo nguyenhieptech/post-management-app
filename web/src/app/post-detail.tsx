@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+import { mutationPostFormSchema } from "@/app/create-post";
 import { ArrowLeftIcon } from "@/assets/icons";
 import { Container } from "@/components/container";
 import { Prose } from "@/components/prose";
@@ -29,7 +30,6 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/toast";
-import { mutationPostFormSchema } from "@/pages/create-post";
 import { useAppSelector } from "@/store";
 import {
   useDeletePostMutation,
