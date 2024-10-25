@@ -1,4 +1,4 @@
-import { Container } from "@/components";
+import { Container } from "@/components/container";
 import React from "react";
 
 type Props = {

@@ -1,6 +1,6 @@
 // https://ui.shadcn.com/docs/components/textarea
 
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import React from "react";
 
 export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}

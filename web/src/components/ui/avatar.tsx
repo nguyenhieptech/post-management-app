@@ -1,6 +1,6 @@
 // https://ui.shadcn.com/docs/components/avatar
 
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import React from "react";
 

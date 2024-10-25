@@ -1,11 +1,12 @@
-import { PostPreview, SimpleLayout } from "@/components";
+import { PostPreview } from "@/components/post-preview";
+import { SimpleLayout } from "@/components/simple-layout";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui";
+} from "@/components/ui/select";
 import { useGetPostsQuery } from "@/store/api";
 import { useEffect, useState } from "react";
 

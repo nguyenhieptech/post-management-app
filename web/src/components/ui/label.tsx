@@ -1,6 +1,6 @@
 // https://ui.shadcn.com/docs/components/label
 
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";

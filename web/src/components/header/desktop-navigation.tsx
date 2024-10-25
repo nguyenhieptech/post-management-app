@@ -1,7 +1,7 @@
+import { cn } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { baseApi } from "@/store/api";
 import { logout } from "@/store/slices";
-import { cn } from "@/utils";
 import { NavLink, NavLinkProps } from "react-router-dom";
 
 type DesktopNavItemProps = NavLinkProps & {

@@ -1,5 +1,5 @@
 import { ChevronRightIcon } from "@/assets/icons";
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 import { NavLink, NavLinkProps } from "react-router-dom";
 

@@ -1,15 +1,16 @@
-import { PostPreview, SimpleLayout } from "@/components";
+import { PostPreview } from "@/components/post-preview";
+import { SimpleLayout } from "@/components/simple-layout";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui";
+} from "@/components/ui/select";
 import { useAppSelector } from "@/store";
 import { useGetPostsByAuthorQuery } from "@/store/api";
 import { useEffect, useState } from "react";
-import { tags } from ".";
+import { tags } from "./home";
 
 export function YourPosts() {
   const authorId = useAppSelector((state) => state.auth.userInfo?.id);

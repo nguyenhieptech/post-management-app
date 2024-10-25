@@ -1,6 +1,6 @@
 // https://ui.shadcn.com/docs/components/select
 
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import React from "react";

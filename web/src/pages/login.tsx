@@ -1,14 +1,14 @@
+import { Button } from "@/components/ui/button";
 import {
-  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-  toast,
-} from "@/components/ui";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { useAppDispatch } from "@/store";
 import { useLoginMutation } from "@/store/api";
 import { login } from "@/store/slices";

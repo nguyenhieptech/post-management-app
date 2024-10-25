@@ -1,5 +1,6 @@
-import { Footer, Header } from "@/components";
-import { cn } from "@/utils";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { cn } from "@/lib/utils";
 import { Outlet } from "react-router-dom";
 
 export function AppLayout() {

@@ -1,4 +1,4 @@
-import { Container } from "@/components";
+import { Container } from "@/components/container";
 import { useAppSelector } from "@/store";
 import { NavLink } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 // https://ui.shadcn.com/docs/components/dropdown-menu
 
-import { cn } from "@/utils";
+import { cn } from "@/lib/utils";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { CheckIcon, ChevronRightIcon, DotFilledIcon } from "@radix-ui/react-icons";
 import React from "react";

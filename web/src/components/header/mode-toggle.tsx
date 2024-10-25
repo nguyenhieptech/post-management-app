@@ -1,11 +1,11 @@
 import { MoonIcon, SunIcon } from "@/assets/icons";
+import { Button } from "@/components/ui/button";
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui";
+} from "@/components/ui/dropdown-menu";
 import { useTheme } from "@/providers";
 
 export function ModeToggle() {

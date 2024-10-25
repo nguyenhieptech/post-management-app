@@ -1,9 +1,9 @@
 import { ChevronDownIcon, CloseIcon } from "@/assets/icons";
-import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from "@/components/ui";
+import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { baseApi } from "@/store/api";
 import { logout } from "@/store/slices";
-import { cn } from "@/utils";
 import { NavLink, NavLinkProps } from "react-router-dom";
 
 type MobileNavItemProps = NavLinkProps & {

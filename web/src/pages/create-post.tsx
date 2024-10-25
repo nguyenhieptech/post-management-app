@@ -1,22 +1,24 @@
-import { Container } from "@/components";
+import { Container } from "@/components/container";
+import { Button } from "@/components/ui/button";
 import {
-  Button,
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Separator,
-  Textarea,
-  toast,
-} from "@/components/ui";
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/toast";
 import { useAppSelector } from "@/store";
 import { useCreatePostMutation } from "@/store/api";
 import { ApiErrorResponse } from "@/types";
@@ -24,7 +26,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as z from "zod";
-import { tags } from ".";
+import { tags } from "./home";
 
 export const mutationPostFormSchema = z.object({
   title: z

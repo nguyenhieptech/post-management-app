@@ -1,30 +1,35 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { ArrowLeftIcon } from "@/assets/icons";
-import { Container, Prose } from "@/components";
+import { Container } from "@/components/container";
+import { Prose } from "@/components/prose";
+import { Button } from "@/components/ui/button";
 import {
-  Button,
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
+} from "@/components/ui/dialog";
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
-  Separator,
-  Textarea,
-  toast,
-} from "@/components/ui";
-import { mutationPostFormSchema } from "@/pages";
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/toast";
+import { mutationPostFormSchema } from "@/pages/create-post";
 import { useAppSelector } from "@/store";
 import {
   useDeletePostMutation,
